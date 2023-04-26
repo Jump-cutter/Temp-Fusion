@@ -1,0 +1,199 @@
+{
+	Tools = ordered() {
+		Background1 = Background {
+			Inputs = {
+				GlobalOut = Input { Value = 120, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				TopLeftRed = Input { Value = 0.113725490196078, },
+				TopLeftGreen = Input { Value = 0.56078431372549, },
+				TopLeftBlue = Input { Value = 0.611764705882353, },
+				EffectMask = Input {
+					SourceOp = "Rectangle1",
+					Source = "Mask",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 761.333, 20.697 } },
+			Colors = { TileColor = { R = 0.266666666666667, G = 0.56078431372549, B = 0.396078431372549 }, }
+		},
+		Bar_Position = Transform {
+			CtrlWZoom = false,
+			NameSet = true,
+			Inputs = {
+				Center = Input {
+					SourceOp = "Path1",
+					Source = "Position",
+				},
+				Input = Input {
+					SourceOp = "Background1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 773.333, 80.6969 } },
+			Colors = { TileColor = { R = 0.266666666666667, G = 0.56078431372549, B = 0.396078431372549 }, }
+		},
+		Path1 = PolyPath {
+			DrawMode = "InsertAndModify",
+			CtrlWZoom = false,
+			Inputs = {
+				Displacement = Input {
+					SourceOp = "Path1Displacement",
+					Source = "Value",
+				},
+				PolyLine = Input {
+					Value = Polyline {
+						Points = {
+							{ Linear = true, LockY = true, X = 0, Y = 0, RX = 0.0826388888888889, RY = 0 },
+							{ Linear = true, LockY = true, X = 0.247916666666667, Y = 0, LX = -0.0826388888888889, LY = 0, RX = -0.147916666666667, RY = 0 },
+							{ Linear = true, LockY = true, X = -0.195833333333333, Y = 0, LX = 0.147916666666667, LY = 0 }
+						}
+					},
+				},
+			},
+		},
+		Path1Displacement = BezierSpline {
+			SplineColor = { Red = 255, Green = 0, Blue = 255 },
+			CtrlWZoom = false,
+			NameSet = true,
+			KeyFrames = {
+				[0] = { 0, RH = { 14.3333333333333, 0.119477911646586 }, Flags = { LockedY = true } },
+				[43] = { 0.358433734939759, LH = { 25.8, 0.35 }, RH = { 64.2, 0.376 }, Flags = { LockedY = true } },
+				[99] = { 1, LH = { 71.4, 0.995999999999999 }, Flags = { LockedY = true } }
+			}
+		},
+		Rectangle1 = RectangleMask {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				MaskWidth = Input { Value = 1920, },
+				MaskHeight = Input { Value = 1080, },
+				PixelAspect = Input { Value = { 1, 1 }, },
+				ClippingMode = Input { Value = FuID { "None" }, },
+				Width = Input { Value = 0.016, },
+				Height = Input { Value = 0.268, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 756.667, -22 } },
+			Colors = { TileColor = { R = 0.266666666666667, G = 0.56078431372549, B = 0.396078431372549 }, }
+		},
+		Matte_Position = Transform {
+			NameSet = true,
+			Inputs = {
+				Center = Input { Expression = "Bar_Position.Center", },
+				Input = Input {
+					SourceOp = "Merge2",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 564.667, 84 } },
+		},
+		Merge2 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "Transform1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Background1",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 563.333, 44.9394 } },
+		},
+		Background2 = Background {
+			Inputs = {
+				GlobalOut = Input { Value = 120, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 562, -22.0606 } },
+		},
+		Transform1 = Transform {
+			Inputs = {
+				Center = Input { Value = { -0.00625, 0.5 }, },
+				Input = Input {
+					SourceOp = "Background2",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 560, 11.2727 } },
+		},
+		Bar = Underlay {
+			NameSet = true,
+			Inputs = {
+				Comments = Input { Value = "Bar", }
+			},
+			ViewInfo = UnderlayInfo {
+				Pos = { 770.333, -45.3637 },
+				Size = { 190, 169.576 }
+			},
+			Colors = { TileColor = { R = 0.266666666666667, G = 0.56078431372549, B = 0.396078431372549 }, }
+		},
+		Matte_Wiper = Underlay {
+			NameSet = true,
+			ViewInfo = UnderlayInfo {
+				Pos = { 572, -45.3637 },
+				Size = { 172, 177.455 }
+			},
+		},
+		Text1 = TextPlus {
+			Inputs = {
+				GlobalOut = Input { Value = 120, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				LayoutRotation = Input { Value = 1, },
+				TransformRotation = Input { Value = 1, },
+				Red1 = Input { Value = 0.113725498318672, },
+				Green1 = Input { Value = 0.560784339904785, },
+				Blue1 = Input { Value = 0.61176472902298, },
+				Softness1 = Input { Value = 1, },
+				StyledText = Input { Value = "HELLO", },
+				Font = Input { Value = "Open Sans", },
+				Style = Input { Value = "Bold", },
+				Size = Input { Value = 0.1969, },
+				VerticalJustificationNew = Input { Value = 3, },
+				HorizontalJustificationNew = Input { Value = 3, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 280, -35.0606 } },
+		},
+		Merge1 = Merge {
+			Inputs = {
+				Background = Input {
+					SourceOp = "MatteControl1",
+					Source = "Output",
+				},
+				Foreground = Input {
+					SourceOp = "Bar_Position",
+					Source = "Output",
+				},
+				PerformDepthMerge = Input { Value = 0, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 781.333, 165.545 } },
+		},
+		MatteControl1 = MatteControl {
+			Inputs = {
+				Filter = Input { Value = FuID { "Fast Gaussian" }, },
+				["Garbage.Matte"] = Input {
+					SourceOp = "Matte_Position",
+					Source = "Output",
+				},
+				Background = Input {
+					SourceOp = "PipeRouter1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 600, 164.333 } },
+		},
+		PipeRouter1 = PipeRouter {
+			Inputs = {
+				Input = Input {
+					SourceOp = "Text1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = PipeRouterInfo { Pos = { 273.333, 167.364 } },
+		}
+	}
+}
